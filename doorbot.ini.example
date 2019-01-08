@@ -1,0 +1,17 @@
+[Doorbot]
+SensorPin = 37
+Message = @here Ding Dong
+UseCamera = Yes
+# Replace this with your actual webhook. Visit
+# https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks
+# for instructions as to how to create a webhook
+DiscordWebhook = 123456789012345678/abccdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+
+[Camera]
+Protocol = http
+Host = hostname
+User = admin
+Pass = Password
+Path = /cgi-bin/snapshot.cgi
+
+

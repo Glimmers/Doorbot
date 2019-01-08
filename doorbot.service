@@ -1,0 +1,19 @@
+[Unit]
+Description=Discord doorbell bot
+
+[Service]
+Type=simple
+PIDFile=/var/run/doorbot/doorbot.pid
+Environment=PYTHONUNBUFFERED=True
+ExecStart=/home/doorbot/doorbot.py
+KillMode=process
+User=doorbot
+Group=doorbot
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
+Alias=doorbot.service
