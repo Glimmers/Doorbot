@@ -10,20 +10,29 @@ import requests
 import configparser
 from datetime import datetime
 
+noalertfile = '/home/doorbot/noalert'
+pidfile = '/home/doorbot/doorbot.pid'
+
+# Use pi pin numbers
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(sensor_pin, GPIO.IN)
+
+# Pull and parse config file
 config = configparser.ConfigParser()
 config.read('doorbot.ini')
 
+# Missing main section, bail
 if 'Doorbot' not in config:
   raise Exception('Missing "Doorbot" section in doorbot.ini')
 
 main_config = config['Doorbot']
 use_camera = main_config.getboolean('UseCamera', False)
 
+# We need to know what pin we're listening on
 if 'sensorpin' not in main_config:
   raise Exception('Missing SensorPin definition in Doorbot section of doorbot.ini')
 
 sensor_pin = main_config.getint('sensorpin')
-message = main_config.get('message', '@here Ding Dong')
 
 if 'discordwebhook' not in main_config:
   raise Exception('Missing "DiscordWebhook" definition in Doorbot section of doorbot.ini')
@@ -31,6 +40,10 @@ if 'discordwebhook' not in main_config:
 discord_webhook = main_config.get('discordwebhook')
 discord_uri = "https://discordapp.com/api/webhooks/" + discord_webhook
 
+# Message to display when the bell is rung. If one's not provided, we give a generic
+message = main_config.get('message', '@here Ding Dong')
+
+# Build camera image path if we're set to use a camera
 camera_image_uri=''
 
 if use_camera:
@@ -38,10 +51,10 @@ if use_camera:
 
   # We need at least a host and a path for the camera, everything else can be either implied or skipped
   if 'host' not in camera_config:
-    raise Exception('Missing "Host" definition in Camera section of doorbot.ini')
+    raise Exception('Missing "Host" definition in [Camera] section of doorbot.ini')
 
   if 'path' not in camera_config:
-    raise Exception('Missing "Path" definition in Camera section of doorbot.ini')
+    raise Exception('Missing "Path" definition in [Camera] section of doorbot.ini')
 
   camera_protocol = camera_config.get('protocol', 'http')
   camera_host = camera_config.get('host')
@@ -50,6 +63,9 @@ if use_camera:
   camera_pass = camera_config.get('pass', '')
   camera_hostpath = camera_host + camera_path
   camera_prot = camera_protocol + '://'
+
+  if (camera_protocol != 'http' and camera_protocol != 'https'):
+    raise Exception('Unable to handle Protocol ' + camera_protocol + ' . Valid protocols are http or https')
 
   # Assemble full uri based on provided info
   if (camera_user == ''):
@@ -73,13 +89,6 @@ camera_form = {
     'payload_json':discord_json
 }
 
-pidfile = '/home/doorbot/doorbot.pid'
-noalertfile = '/home/doorbot/noalert'
-
-# Use pi pin numbers
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(sensor_pin, GPIO.IN)
-
 # Function for clearing the PID file on completion
 
 def closePid(pidHandle):
@@ -88,8 +97,8 @@ def closePid(pidHandle):
     fcntl.flock(pidHandle, fcntl.LOCK_UN)
     pidHandle.close()
 
+# Lock the PID file to prevent multiple bot instances from running simultaneously
 pid = str(os.getpid())
-pidfile = '/home/doorbot/doorbot.pid'
 pidLock = open(pidfile, 'w') 
 fcntl.flock(pidLock, fcntl.LOCK_EX | fcntl.LOCK_NB)
 pidLock.write(pid)
@@ -113,7 +122,7 @@ while (True):
         print(str(datetime.now()) + " -- " + "Glitch. Disregarding")
         continue
 
-    # If we're not set to alert, don't send web alert 
+    # If we're not set to alert, don't send web alert, don't get camera image 
     if os.path.isfile(noalertfile) :
       print(str(datetime.now()) + " -- " + "Bell rang, alerts disabled")
       continue
