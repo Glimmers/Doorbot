@@ -103,7 +103,7 @@ print("Now Waiting")
 while (True):
   status = GPIO.wait_for_edge(sensor_pin, GPIO.RISING, timeout=1000)
   
-  if status == 37:
+  if status == sensor_pin:
     time.sleep(10.0/1000)
   
     # Debounce/deglitch filter to strip out false positives 
