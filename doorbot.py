@@ -13,10 +13,6 @@ from datetime import datetime
 noalertfile = '/home/doorbot/noalert'
 pidfile = '/home/doorbot/doorbot.pid'
 
-# Use pi pin numbers
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(sensor_pin, GPIO.IN)
-
 # Pull and parse config file
 config = configparser.ConfigParser()
 config.read('doorbot.ini')
@@ -99,6 +95,10 @@ def closePid(pidHandle):
     pidHandle.truncate()
     fcntl.flock(pidHandle, fcntl.LOCK_UN)
     pidHandle.close()
+
+# Setup GPIO, using pi pin numbers
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(sensor_pin, GPIO.IN)
 
 # Lock the PID file to prevent multiple bot instances from running simultaneously
 pid = str(os.getpid())
