@@ -1,3 +1,6 @@
 doorbot.ini
 .vs
 
+*.b#?
+*.s#?
+
