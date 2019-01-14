@@ -68,12 +68,12 @@ these circuits, hooking up to the Pi side of the board is the same. Pin 1 goes t
 pin of the Pi (pin 1 or pin 17). Pin 2 goes to one of the GPIO pins, typically pin 37. Pin 3 goes to
 Ground (any one of pin 6, 9, 14, 20, 25, 30, 34, or 39).
 
-*     For the 1 transistor schematic, pin 1 of the relay side goes to the Normally Open pin of the
-      relay. Pin 3 of the relay goes to the common side. Pin 2 is for testing, and not used for normal
-      operation.
+* For the 1 transistor schematic, pin 1 of the relay side goes to the Normally Open pin of the
+  relay. Pin 3 of the relay goes to the common side. Pin 2 is for testing, and not used for normal
+  operation.
 
-*     For the 3-transistor schematic, pin one of the relay side goes to the Normally Open pin of the
-      relay. Pin 2 goes to the Common pin of the relay. Pin 3 goes to the Normally Closed pin.
+* For the 3-transistor schematic, pin one of the relay side goes to the Normally Open pin of the
+  relay. Pin 2 goes to the Common pin of the relay. Pin 3 goes to the Normally Closed pin.
 
 For hooking the relay up to the chime, typically you'll hook the coil leads so one is going to the
 terminal labelled "Trans" and the other to the terminal labelled "Front". While hooking it up, you'll
