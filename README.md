@@ -7,13 +7,13 @@ which will send a message to a Discord channel.
 Dependencies
 ------------
 
-*    A Raspberry Pi running Raspbian
-*    The following packages
+* A Raspberry Pi running Raspbian
+* The following packages
         python3
         python3-rpi.gpio
         python3-requests
-*    A Discord account
-*    A webhook set up for the discord channel you want your messages to go to. For instructions on
+* A Discord account
+* A webhook set up for the discord channel you want your messages to go to. For instructions on
       setting up a webhook, visit
       https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks
 
@@ -22,9 +22,11 @@ Software Installation instructions
 
 1. Download the package to your pi.
 
-    *   Via git: git clone https://github.com/Glimmers/Doorbot.git doorbot
+    * Via git: 
+            git clone https://github.com/Glimmers/Doorbot.git doorbot
 
-    *   Via wget: wget https://github.com/Glimmers/Doorbot/archive/master.zip
+    * Via wget:
+            wget https://github.com/Glimmers/Doorbot/archive/master.zip
 
 2. Run the included install.sh shell script to add the requisite service user, install dependencies,
 copy the files into the service user's directory, and install the systemd service.
