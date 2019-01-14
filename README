@@ -51,7 +51,12 @@ minimum, you will need to replace all the values in the [Doorbot] section.
 
 Hardware Installation Instructions
 
-In the Eagle Schematics directory, there are schematics in Eagle 7.x format for two variants of sense boards. The first -- Doorbell.sch -- is a basic 1-transistor schematic. The second -- DoorbellBothRelayBJT.sch -- is the 3-transistor schematic which has better noise tolerance. For both of these circuits, hooking up to the Pi side of the board is the same. Pin 1 goes to the +3.3 volt supply pin of the Pi (pin 1 or pin 17). Pin 2 goes to one of the GPIO pins, typically pin 37. Pin 3 goes to Ground (any one of pin 6, 9, 14, 20, 25, 30, 34, or 39).
+In the Eagle Schematics directory, there are schematics in Eagle 7.x format for two variants of sense
+boards. The first -- Doorbell.sch -- is a basic 1-transistor schematic. The second --
+DoorbellBothRelayBJT.sch -- is the 3-transistor schematic which has better noise tolerance. For both of
+these circuits, hooking up to the Pi side of the board is the same. Pin 1 goes to the +3.3 volt supply
+pin of the Pi (pin 1 or pin 17). Pin 2 goes to one of the GPIO pins, typically pin 37. Pin 3 goes to
+Ground (any one of pin 6, 9, 14, 20, 25, 30, 34, or 39).
 
     a) For the 1 transistor schematic, pin 1 of the relay side goes to the Normally Open pin of the
       relay. Pin 3 of the relay goes to the common side. Pin 2 is for testing, and not used for normal
