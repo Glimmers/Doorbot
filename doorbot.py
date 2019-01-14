@@ -61,13 +61,16 @@ if use_camera:
   camera_path = camera_config.get('path')
   camera_user = camera_config.get('user', '')
   camera_pass = camera_config.get('pass', '')
-  camera_hostpath = camera_host + camera_path
-  camera_prot = camera_protocol + '://'
 
+  # The Requests library which we use does not support anythng but http(s)
   if (camera_protocol != 'http' and camera_protocol != 'https'):
     raise Exception('Unable to handle Protocol ' + camera_protocol + ' . Valid protocols are http or https')
 
   # Assemble full uri based on provided info
+
+  camera_hostpath = camera_host + camera_path
+  camera_prot = camera_protocol + '://'
+
   if (camera_user == ''):
     camera_image_uri = camera_prot + camera_hostpath
   elif (camera_pass == ''):
@@ -106,6 +109,8 @@ pidLock.flush()
 os.fsync(pidLock)
 
 atexit.register(closePid, pidLock)
+
+# Setup is done, start main event loop
 
 print("Now Waiting")
 
