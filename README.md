@@ -9,9 +9,11 @@ Dependencies
 
 * A Raspberry Pi running Raspbian
 * The following packages
+
         python3
         python3-rpi.gpio
         python3-requests
+
 * A Discord account
 * A webhook set up for the discord channel you want your messages to go to. For instructions on
       setting up a webhook, visit
@@ -23,9 +25,11 @@ Software Installation instructions
 1. Download the package to your pi.
 
     * Via git: 
+
             git clone https://github.com/Glimmers/Doorbot.git doorbot
 
     * Via wget:
+
             wget https://github.com/Glimmers/Doorbot/archive/master.zip
 
 2. Run the included install.sh shell script to add the requisite service user, install dependencies,
