@@ -32,13 +32,13 @@ Software Installation instructions
 
             wget https://github.com/Glimmers/Doorbot/archive/master.zip
 
-2. Run the included install.sh shell script to add the requisite service user, install dependencies,
+2. Run the included `install.sh` shell script to add the requisite service user, install dependencies,
 copy the files into the service user's directory, and install the systemd service.
 
-3. Copy the example discord.ini file to the actual ini file, and fill out the fields inside. At a
-minimum, you will need to replace all the values in the [Doorbot] section.
+3. Copy the example `discord.ini` file to the actual ini file, and fill out the fields inside. At a
+minimum, you will need to replace all the values in the `[Doorbot]` section.
 
-    a) If you're not using a camera, set UseCamera = no .
+    a) If you're not using a camera, set `UseCamera = no` .
 
     b) If you are using a Camera, fill out the [Camera] section with the access type, hostname,
     username and password if needed, and path to get an image. For example, if the URL to get an image
@@ -87,7 +87,7 @@ The one-transistor board has a provision for testing, which is useful in develop
 the board. In testing, remove the board from the relay, and hook a 2N2222 or 2N3904 transistor to the
 relay header, with pin 1 of the transistor corresponding to pin 1 of the socket, pin 2 of the
 transistor going to pin 2 of the socket, and pin 3 going to pin 3. The test pin should go to one of the
-GPIO leads of the PI, typically pin 35.
+GPIO leads of the Pi, typically pin 35.
 
 License
 -------
